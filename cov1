@@ -1,0 +1,18 @@
+module fff;
+  bit [2:0]a;
+  bit [2:0]b;
+  covergroup cog;
+    c1: coverpoint a;
+    c2: coverpoint b;
+  endgroup
+  cog c;
+  initial begin
+    c= new();
+    repeat (20) begin
+      void' (randomize(a,b));
+      c.sample();
+      
+      $display("a= %0d, b=%0d coverage = %.2f",a,b,c.get_inst_coverage());
+    end
+  end
+      endmodule
